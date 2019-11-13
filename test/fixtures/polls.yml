@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  event_date: 2019-11-13
+  address: MyString
+  owner: one
+
+two:
+  name: MyString
+  event_date: 2019-11-13
+  address: MyString
+  owner: two
