@@ -24,6 +24,7 @@ class PollsController < ApplicationController
   # POST /polls
   # POST /polls.json
   def create
+    debugger
     @poll = Poll.new(poll_params)
 
     respond_to do |format|
@@ -69,6 +70,6 @@ class PollsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poll_params
-      params.require(:poll).permit(:name, :event_date, :address, :owner_id)
+      params.require(:poll).permit(:name, :event_date, :address, :user_id)
     end
 end

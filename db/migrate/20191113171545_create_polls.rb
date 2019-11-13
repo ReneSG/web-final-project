@@ -4,7 +4,7 @@ class CreatePolls < ActiveRecord::Migration[5.1]
       t.string :name
       t.date :event_date
       t.string :address
-      t.references :owner, foreign_key: true
+      t.references :user, foreign_key: true
 
       t.timestamps
     end
