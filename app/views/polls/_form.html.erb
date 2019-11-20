@@ -26,6 +26,11 @@
     <%= form.text_field :address, id: :poll_address %>
   </div>
 
+  <div class="field">
+    <%= form.label "Invitees" %>
+    <%= form.text_field :respondees, id: :poll_respondees %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
