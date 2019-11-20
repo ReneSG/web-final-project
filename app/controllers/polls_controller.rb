@@ -28,7 +28,7 @@ class PollsController < ApplicationController
     @poll = Poll.new(poll_params)
     @poll.owner_id = current_user.id
     @client = GooglePlaces::Client.new("AIzaSyBewVg-2JE4BAunjrxdhKU8ao8qnOLvuAc")
-    params[:poll][:respondees].split(",").each do |email|
+    params[:poll][:respondees].tr(' ', '').split(",").each do |email|
       user = User.find_by(email: email)
       if user
         @poll.users << user
