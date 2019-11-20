@@ -4,5 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :polls
+  has_many :created_polls, class_name: :Poll, foreign_key: "owner_id"
+  has_and_belongs_to_many :polls
 end

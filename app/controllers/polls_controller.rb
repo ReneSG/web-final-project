@@ -26,9 +26,14 @@ class PollsController < ApplicationController
   # POST /polls.json
   def create
     @poll = current_user.polls.new(poll_params)
+    @client = GooglePlaces::Client.new("AIzaSyBewVg-2JE4BAunjrxdhKU8ao8qnOLvuAc")
+    options = @client.spots_by_query(@poll.address, types: ['restaurant', 'food']).slice(0, 10)
 
     respond_to do |format|
       if @poll.save
+        options.each do |option|
+          @poll.options.create(name: option.name, positive_votes: 0, negative_votes: 0)
+        end
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
         format.json { render :show, status: :created, location: @poll }
       else
@@ -63,13 +68,13 @@ class PollsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_poll
-      @poll = current_user.polls.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_poll
+    @poll = current_user.polls.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def poll_params
-      params.require(:poll).permit(:name, :event_date, :address, :user_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def poll_params
+    params.require(:poll).permit(:name, :event_date, :address, :user_id)
+  end
 end
