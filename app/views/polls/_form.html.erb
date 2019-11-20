@@ -1,3 +1,8 @@
+<script>
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>
 <%= form_with(model: poll, local: true) do |form| %>
   <% if poll.errors.any? %>
     <div id="error_explanation">
@@ -18,7 +23,7 @@
 
   <div class="field">
     <%= form.label :event_date %>
-    <%= form.date_select :event_date, id: :poll_event_date %>
+    <%= form.text_field :event_date, id: :poll_event_date, class: "datepicker"%>
   </div>
 
   <div class="field">
