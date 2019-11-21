@@ -5,11 +5,28 @@
 
       <h1><%= @option.name %></h1>
 
+      <% unless @photos.empty? %>
+        <div class="carousel carousel-slider">
+          <% @photos.each do |p| %>
+            <a class="carousel-item"><img src="<%= p %>"></a>
+          <% end %>
+        </div>
+      <% end  %>
+
+      <div>Dirección: <%= @option_info.formatted_address %></div>
+      <div>Rating: <%= @option_info.rating %></div>
+
     </div>
   </div>
 </div>
 
 <br>
+
+<script charset="utf-8">
+$('.carousel.carousel-slider').carousel({
+    fullWidth: true
+  });
+</script>
 
 <%= link_to 'New Poll', new_poll_path %>
 
