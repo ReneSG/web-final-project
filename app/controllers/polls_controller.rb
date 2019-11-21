@@ -5,7 +5,8 @@ class PollsController < ApplicationController
   # GET /polls
   # GET /polls.json
   def index
-    @polls = Poll.all
+    @pending_polls = current_user.polls.where(status: "pending")
+    @done_polls = current_user.polls.where(status: "done")
   end
 
   # GET /polls/1
