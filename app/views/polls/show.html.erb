@@ -1,35 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-<strong>Name:</strong>
-<%= @poll.name %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col s12 m12">
+      <h2>
+      <strong>Results for poll:</strong>
+      <%= @poll.name %>
+      </h2>
 
-<p>
-<strong>Event date:</strong>
-<%= @poll.event_date %>
-</p>
+      <p>
+      <strong>Date:</strong>
+      <%= @poll.event_date %>
+      </p>
 
-<p>
-<strong>Address:</strong>
-<%= @poll.address %>
-</p>
+      <p>
+      <strong>Suggested address:</strong>
+      <%= @poll.address %>
+      </p>
 
-<p>
-<strong>Owner:</strong>
-<%= @poll.owner %>
-</p>
+      <p>
+      <strong>Poll creator:</strong>
+      <%= @poll.owner.email %>
+      </p>
 
 
-<h1><%= @option.name %></h1>
+      <h1><%= @option.name %></h1>
 
-<% unless @photos.empty? %>
-  <div class="carousel carousel-slider">
-    <% @photos.each do |p| %>
-      <a class="carousel-item"><img src="<%= p %>"></a>
-    <% end %>
+      <% unless @photos.empty? %>
+        <div class="carousel carousel-slider">
+          <% @photos.each do |p| %>
+            <a class="carousel-item"><img src="<%= p %>"></a>
+          <% end %>
+        </div>
+      <% end  %>
+
+      <div class="actions">
+        <div><b>Address:</b> <%= @option_info.formatted_address %></div>
+        <div><b>Rating:</b> <%= @option_info.rating %></div>
+      </div>
+    </div>
   </div>
-<% end  %>
+</div>
 
-<%= link_to 'Edit', edit_poll_path(@poll) %> |
-<%= link_to 'Back', polls_path %>
+<script charset="utf-8">
+$('.carousel.carousel-slider').carousel({
+    fullWidth: true
+  });
+</script>

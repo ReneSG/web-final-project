@@ -13,7 +13,6 @@ class Poll < ApplicationRecord
   end
 
   def compute_winner
-    debugger;
     options.order("positive_votes DESC").first
   end
 
