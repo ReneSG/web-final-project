@@ -22,10 +22,6 @@
               <td><%= poll.name %></td>
               <td><%= poll.event_date %></td>
               <td><%= poll.address %></td>
-              <td><%= poll.owner.email %></td>
-              <% if poll.getNextOption %>
-                <td><%= button_to 'Start Poll', {:controller => "polls", :action => "start",:id => poll.id} , :method=>:post, class: "btn option-button"  %></td>
-              <% end %>
             </tr>
           <% end %>
         </tbody>
@@ -50,7 +46,6 @@
               <td><%= poll.name %></td>
               <td><%= poll.event_date %></td>
               <td><%= poll.address %></td>
-              <td><%= poll.owner.email %></td>
               <td><%= link_to 'Results', poll %></td>
             </tr>
           <% end %>
@@ -59,4 +54,5 @@
     </div>
   </div>
 </div>
+
 <br>

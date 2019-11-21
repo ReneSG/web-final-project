@@ -9,6 +9,11 @@ class PollsController < ApplicationController
     @done_polls = current_user.polls.where(status: "done")
   end
 
+  def my_polls
+    @pending_polls = current_user.created_polls.where(status: "pending")
+    @done_polls = current_user.created_polls.where(status: "done")
+  end
+
   # GET /polls/1
   # GET /polls/1.json
   def show

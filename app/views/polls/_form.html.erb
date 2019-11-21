@@ -1,7 +1,7 @@
 <script>
-  $(document).ready(function(){
-    $('.datepicker').datepicker();
-  });
+$(document).ready(function(){
+  $('.datepicker').datepicker();
+});
 </script>
 <%= form_with(model: poll, local: true) do |form| %>
   <% if poll.errors.any? %>
@@ -9,9 +9,9 @@
       <h2><%= pluralize(poll.errors.count, "error") %> prohibited this poll from being saved:</h2>
 
       <ul>
-      <% poll.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% poll.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
