@@ -16,7 +16,7 @@ class OptionsController < ApplicationController
     if params[:vote_yes] == "true"
       @option.positive_votes += 1
     else
-      @option.negative_votes += 1
+      @option.positive_votes -= 1
     end
 
     if @option.save

@@ -1,6 +1,6 @@
 class PollsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_poll, only: [:show, :edit, :update, :destroy]
+  before_action :set_poll, only: [:edit, :update, :destroy]
 
   # GET /polls
   # GET /polls.json
@@ -12,6 +12,16 @@ class PollsController < ApplicationController
   # GET /polls/1
   # GET /polls/1.json
   def show
+    @poll = Poll.find(params[:id])
+    @option = @poll.compute_winner
+    @client = GooglePlaces::Client.new("AIzaSyBewVg-2JE4BAunjrxdhKU8ao8qnOLvuAc")
+    @option_info = @client.spot(@option.place_id)
+    min_photos = [5, @option_info.photos.count].min
+    @photos = []
+    return if min_photos == 0
+    (0..min_photos).each do |i|
+      @photos << @option_info.photos[i].fetch_url(800)
+    end
   end
 
   # GET /polls/new

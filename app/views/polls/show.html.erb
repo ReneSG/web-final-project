@@ -1,24 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @poll.name %>
+<strong>Name:</strong>
+<%= @poll.name %>
 </p>
 
 <p>
-  <strong>Event date:</strong>
-  <%= @poll.event_date %>
+<strong>Event date:</strong>
+<%= @poll.event_date %>
 </p>
 
 <p>
-  <strong>Address:</strong>
-  <%= @poll.address %>
+<strong>Address:</strong>
+<%= @poll.address %>
 </p>
 
 <p>
-  <strong>Owner:</strong>
-  <%= @poll.owner %>
+<strong>Owner:</strong>
+<%= @poll.owner %>
 </p>
+
+
+<h1><%= @option.name %></h1>
+
+<% unless @photos.empty? %>
+  <div class="carousel carousel-slider">
+    <% @photos.each do |p| %>
+      <a class="carousel-item"><img src="<%= p %>"></a>
+    <% end %>
+  </div>
+<% end  %>
 
 <%= link_to 'Edit', edit_poll_path(@poll) %> |
 <%= link_to 'Back', polls_path %>

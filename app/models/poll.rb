@@ -12,6 +12,11 @@ class Poll < ApplicationRecord
     end
   end
 
+  def compute_winner
+    debugger;
+    options.order("positive_votes DESC").first
+  end
+
   def getNextOption(id = nil)
     options = self.options
     return nil if options.first.nil?
