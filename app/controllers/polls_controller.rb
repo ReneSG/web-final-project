@@ -58,11 +58,9 @@ class PollsController < ApplicationController
         options.each do |option|
           @poll.options.create(name: option.name, positive_votes: 0, negative_votes: 0, place_id: option.reference)
         end
-        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
-        format.json { render :show, status: :created, location: @poll }
+        format.html { redirect_to root_path, notice: 'Poll was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @poll.errors, status: :unprocessable_entity }
       end
     end
   end
