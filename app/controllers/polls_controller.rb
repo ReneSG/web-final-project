@@ -28,6 +28,7 @@ class PollsController < ApplicationController
   def create
     @poll = Poll.new(poll_params)
     @poll.owner_id = current_user.id
+    @poll.answer_count = 0
     @poll.status = "pending"
     @client = GooglePlaces::Client.new("AIzaSyBewVg-2JE4BAunjrxdhKU8ao8qnOLvuAc")
     params[:poll][:respondees].tr(' ', '').split(",").each do |email|
@@ -73,6 +74,13 @@ class PollsController < ApplicationController
       format.html { redirect_to polls_url, notice: 'Poll was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def start
+    @poll = Poll.find(params[:id])
+    @poll.answer_count += 1
+    @poll.save
+    redirect_to option_answer_path(@poll.getNextOption)
   end
 
   private

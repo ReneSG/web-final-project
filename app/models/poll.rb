@@ -4,6 +4,14 @@ class Poll < ApplicationRecord
   has_and_belongs_to_many :users
   enum status: [:pending, :done]
 
+  after_save :maybe_update_status
+
+  def maybe_update_status
+    if answer_count == self.users.count
+      self.update_column(:status, "done")
+    end
+  end
+
   def getNextOption(id = nil)
     options = self.options
     return nil if options.first.nil?

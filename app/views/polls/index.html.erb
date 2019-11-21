@@ -24,7 +24,7 @@
               <td><%= poll.address %></td>
               <td><%= poll.owner.email %></td>
               <% if poll.getNextOption %>
-                <td><%= link_to 'Complete', option_answer_path(poll.getNextOption) %></td>
+                <td><%= button_to 'Start Poll', {:controller => "polls", :action => "start",:id => poll.id} , :method=>:post, class: "btn option-button"  %></td>
               <% end %>
             </tr>
           <% end %>
