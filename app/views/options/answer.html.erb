@@ -13,11 +13,13 @@
         </div>
       <% end  %>
 
-      <div>Dirección: <%= @option_info.formatted_address %></div>
-      <div>Rating: <%= @option_info.rating %></div>
-
-      <%= button_to 'Yes', {:controller => "options", :action => "register_response", :vote_yes => true, :id => @option.id} , :method=>:post  %>
-      <%= button_to 'No', {:controller => "options", :action => "register_response", :vote_yes => false, :id => @option.id} , :method=>:post  %>
+      <div class="actions">
+        <div><b>Address:</b> <%= @option_info.formatted_address %></div>
+        <div><b>Rating:</b> <%= @option_info.rating %></div>
+        <h4>Would you like to go to this place?</h4>
+        <%= button_to 'Yes', {:controller => "options", :action => "register_response", :vote_yes => true, :id => @option.id} , :method=>:post, class: "btn option-button"  %>
+        <%= button_to 'No', {:controller => "options", :action => "register_response", :vote_yes => false, :id => @option.id} , :method=>:post, class: "btn option-button" %>
+      </div>
 
     </div>
   </div>

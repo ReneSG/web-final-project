@@ -23,7 +23,9 @@
               <td><%= poll.event_date %></td>
               <td><%= poll.address %></td>
               <td><%= poll.owner.email %></td>
-              <td><%= link_to 'Complete', poll %></td>
+              <% if poll.getNextOption %>
+                <td><%= link_to 'Complete', option_answer_path(poll.getNextOption) %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
