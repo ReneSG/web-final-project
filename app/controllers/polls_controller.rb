@@ -28,6 +28,7 @@ class PollsController < ApplicationController
   def create
     @poll = Poll.new(poll_params)
     @poll.owner_id = current_user.id
+    @poll.status = "pending"
     @client = GooglePlaces::Client.new("AIzaSyBewVg-2JE4BAunjrxdhKU8ao8qnOLvuAc")
     params[:poll][:respondees].tr(' ', '').split(",").each do |email|
       user = User.find_by(email: email)
@@ -39,7 +40,7 @@ class PollsController < ApplicationController
     respond_to do |format|
       if @poll.save
         options.each do |option|
-          @poll.options.create(name: option.name, positive_votes: 0, negative_votes: 0)
+          @poll.options.create(name: option.name, positive_votes: 0, negative_votes: 0, place_id: option.id)
         end
         format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
         format.json { render :show, status: :created, location: @poll }
