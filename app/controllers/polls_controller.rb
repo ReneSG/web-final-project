@@ -5,7 +5,7 @@ class PollsController < ApplicationController
   # GET /polls
   # GET /polls.json
   def index
-    @pending_polls = current_user.polls.where(status: "pending")
+    @pending_polls = current_user.polls.merge(UserPoll.where(answered: nil))
     @done_polls = current_user.polls.where(status: "done")
   end
 
@@ -93,6 +93,7 @@ class PollsController < ApplicationController
     @poll = Poll.find(params[:id])
     @poll.answer_count += 1
     @poll.save
+    @poll.user_poll.where(user_id: 1).update_all(answered: true)
     redirect_to option_answer_path(@poll.getNextOption)
   end
 

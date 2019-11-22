@@ -21,7 +21,11 @@ class OptionsController < ApplicationController
 
     if @option.save
       respond_to do |format|
-        format.html { redirect_to option_answer_path(@option.id + 1)}
+        if Poll.has_next_option(@option)
+          format.html { redirect_to option_answer_path(@option.poll.getNextOption(@option.id)) }
+        else
+          format.html { redirect_to root_path }
+        end
       end
     else
       respond_to do |format|

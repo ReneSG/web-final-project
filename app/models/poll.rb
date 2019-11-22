@@ -23,4 +23,8 @@ class Poll < ApplicationRecord
     return options.first.id if id == nil
     options.where("id > ?", id).order("id ASC").first.id || options.first.id
   end
+
+  def self.has_next_option(op)
+    !op.poll.options.where("id > ?", op.id).order("id ASC").empty?
+  end
 end
