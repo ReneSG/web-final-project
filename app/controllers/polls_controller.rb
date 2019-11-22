@@ -25,7 +25,8 @@ class PollsController < ApplicationController
     @photos = []
     return if min_photos == 0
     (0..min_photos).each do |i|
-      @photos << @option_info.photos[i].fetch_url(800)
+      next if @option_info.photos[i].nil?
+      @photos << @option_info.photos[i].as_json["fetched_url"]
     end
   end
 
