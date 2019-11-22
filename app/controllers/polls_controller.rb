@@ -5,8 +5,8 @@ class PollsController < ApplicationController
   # GET /polls
   # GET /polls.json
   def index
-    @pending_polls = current_user.polls.merge(UserPoll.where(answered: nil))
-    @done_polls = current_user.polls.where(status: "done")
+    @pending_polls = Poll.where(id: current_user.user_poll.where(answered: nil).pluck(:id)).where(status: "pending")
+    @done_polls = Poll.where(id: current_user.user_poll.where(answered: true).pluck(:id)).where(status: "done")
   end
 
   def my_polls

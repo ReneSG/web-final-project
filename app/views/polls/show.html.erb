@@ -35,7 +35,7 @@
       <% end  %>
 
       <div class="actions">
-        <div><b>Address:</b> <%= @option_info.formatted_address %></div>
+        <div><b>Address:</b><a href="https://maps.google.com/maps?q=<%= @option_info.formatted_address %>"><%= @option_info.formatted_address %></a></div>
         <div><b>Rating:</b> <%= @option_info.rating %></div>
       </div>
     </div>

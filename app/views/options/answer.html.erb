@@ -12,9 +12,8 @@
           <% end %>
         </div>
       <% end  %>
-
       <div class="actions">
-        <div><b>Address:</b> <%= @option_info.formatted_address %></div>
+        <div><b>Address:</b><a href="https://maps.google.com/maps?q=<%= @option_info.formatted_address %>"><%= @option_info.formatted_address %></a></div>
         <div><b>Rating:</b> <%= @option_info.rating %></div>
         <h4>Would you like to go to this place?</h4>
         <%= button_to 'Yes', {:controller => "options", :action => "register_response", :vote_yes => true, :id => @option.id} , :method=>:post, class: "btn option-button"  %>
