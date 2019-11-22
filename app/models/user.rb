@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :created_polls, class_name: :Poll, foreign_key: "owner_id"
-  has_and_belongs_to_many :polls
+  has_many :user_poll
+  has_many :polls, :through => :user_poll
 end
