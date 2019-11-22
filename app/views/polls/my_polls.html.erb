@@ -21,6 +21,7 @@
               <td><%= poll.name %></td>
               <td><%= poll.event_date %></td>
               <td><%= poll.address %></td>
+              <td><%= link_to 'See details', poll_info_path(poll.id) %></td>
             </tr>
           <% end %>
         </tbody>

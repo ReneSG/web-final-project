@@ -5,8 +5,8 @@ class PollsController < ApplicationController
   # GET /polls
   # GET /polls.json
   def index
-    @pending_polls = Poll.where(id: current_user.user_poll.where(answered: nil).pluck(:id)).where(status: "pending")
-    @done_polls = Poll.where(id: current_user.user_poll.where(answered: true).pluck(:id)).where(status: "done")
+    @pending_polls = Poll.where(id: current_user.user_poll.where(answered: nil).pluck(:poll_id))
+    @done_polls = Poll.where(id: current_user.user_poll.where(answered: true).pluck(:poll_id))
   end
 
   def my_polls
@@ -93,8 +93,14 @@ class PollsController < ApplicationController
     @poll = Poll.find(params[:id])
     @poll.answer_count += 1
     @poll.save
-    @poll.user_poll.where(user_id: 1).update_all(answered: true)
+    @poll.user_poll.where(user_id: current_user.id).update_all(answered: true)
     redirect_to option_answer_path(@poll.getNextOption)
+  end
+
+  def info
+    @poll = Poll.find(params[:id])
+    @pending_users = User.where(id: @poll.user_poll.where(answered: nil).pluck(:user_id))
+    @done_users = User.where(id: @poll.user_poll.where(answered: true).pluck(:user_id))
   end
 
   private

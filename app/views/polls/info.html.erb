@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12 m12">
+      <p id="notice"><%= notice %></p>
+
+      <h1>Users pending to answer poll</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @pending_users.each do |u| %>
+            <tr>
+              <td><%= u.email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <h1>Users that already answered the poll</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @done_users.each do |u| %>
+            <tr>
+              <td><%= u.email %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<br>
+
