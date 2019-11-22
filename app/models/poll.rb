@@ -3,7 +3,6 @@ class Poll < ApplicationRecord
   has_many :options, dependent: :destroy
   has_many :user_poll
   has_many :users, :through => :user_poll
-  enum status: [:pending, :done]
 
   after_save :maybe_update_status
 
